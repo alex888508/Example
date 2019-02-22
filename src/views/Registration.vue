@@ -6,7 +6,7 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input v-model="loginForm.email" name="email" type="email" placeholder="email" />
+        <el-input v-model="loginForm.username" name="username" type="email" placeholder="email" />
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
@@ -76,12 +76,12 @@ export default {
     return {
       info: [],
       loginForm: {
-        email: '',
+        username: '',
         password: '',
         check_password: ''
       },
       loginRules: {
-        email: [{ required: true, trigger: 'blur', validator: validateEmail }],
+        username: [{ required: true, trigger: 'blur', validator: validateEmail }],
         password: [{ required: true, trigger: 'blur', validator: validatePass }],
         check_password: [{ required: true, trigger: 'blur', validator: validatePass2 }]
       },
@@ -113,7 +113,7 @@ export default {
           this.loading = true
           this.$store.dispatch('Register', this.loginForm).then(() => {
             this.loading = false
-            this.$router.push({ path: this.redirect || '/phonebook' })
+            this.$router.push({ path: '/phonebook' })
           }).catch(() => {
             this.loading = false
             console.log('catch')

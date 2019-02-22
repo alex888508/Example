@@ -30,7 +30,7 @@ export const constantRouterMap = [
       }
     ]
   },
-  { path: '/', redirect: '/login', hidden: true },
+  { path: '/', redirect: '/login' },
   { path: '*', redirect: '/404', hidden: true }
 ]
 
