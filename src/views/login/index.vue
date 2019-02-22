@@ -6,7 +6,7 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="username" />
+        <el-input v-model="loginForm.username" name="username" type="email" auto-complete="on" placeholder="username" />
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
@@ -28,10 +28,9 @@
           Sign in
         </el-button>
       </el-form-item>
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: admin</span>
-      </div>
+      <el-button :loading="loading" type="success" style="width:30%;" @click.native.prevent="register">
+        Registration
+      </el-button>
     </el-form>
   </div>
 </template>
@@ -93,7 +92,7 @@ export default {
           this.loading = true
           this.$store.dispatch('Login', this.loginForm).then(() => {
             this.loading = false
-            this.$router.push({ path: this.redirect || '/' })
+            this.$router.push({ path: this.redirect || '/phonebook' })
           }).catch(() => {
             this.loading = false
             console.log('catch')
@@ -103,6 +102,9 @@ export default {
           return false
         }
       })
+    },
+    register() {
+      this.$router.push({ path: this.redirect || '/registration' })
     }
   }
 }
