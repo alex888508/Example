@@ -113,7 +113,7 @@ export default {
           this.loading = true
           this.$store.dispatch('Register', this.loginForm).then(() => {
             this.loading = false
-            this.$router.push({ path: '/phonebook' })
+            this.$router.push({ path: this.redirect || '/phonebook' })
           }).catch(() => {
             this.loading = false
             console.log('catch')
