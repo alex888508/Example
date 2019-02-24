@@ -27,9 +27,9 @@ const user = {
       })
     },
     LogOut({ commit, state }) {
+      removeToken()
       return new Promise((resolve, reject) => {
         logout().then(() => {
-          removeToken()
           resolve()
         }).catch(error => {
           reject(error)
