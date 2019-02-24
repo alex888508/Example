@@ -1,23 +1,35 @@
 import router from './router'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-import { getToken } from '@/utils/auth'
+import NProgress from 'nprogress' // progress bar
+import 'nprogress/nprogress.css' // progress bar style
+import { getToken } from '@/utils/auth' // getToken from cookie
+
+NProgress.configure({ showSpinner: false })// NProgress configuration
 
 const whiteList = ['/login', '/registration']
 router.beforeEach((to, from, next) => {
-  if (getToken()) {
-    if (to.path === '/login') {
-      next({ path: '/' })
-    }
-  } else if (to.path === '/Phonebook') {
-    next({ path: '/login' })
+  NProgress.start()
+  if (to.path === '/user/phonebook') {
+    if (getToken()) {
+      next()
+      NProgress.done()
+    } else next('/login')
+  }
+  if (to.path === '/user') {
+    if (getToken()) {
+      next()
+      NProgress.done()
+    } else next('/login')
+  }
+  if (whiteList.indexOf(to.path) !== -1) {
+    next()
   } else {
-    if (whiteList.indexOf(to.path) !== -1) {
-      next()
-    } else if (to.path === '/registration') {
-      next({ path: '/' })
-    } else {
-      next()
+    if (to.path === '/login') {
+      if (getToken()) {
+        next('/user') // 否则全部重定向到登录页
+        NProgress.done()
+      } else {
+        next()
+      }
     }
   }
 })

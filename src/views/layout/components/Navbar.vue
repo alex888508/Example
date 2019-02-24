@@ -3,7 +3,7 @@
     <hamburger :toggle-click="toggleSideBar" :is-active="sidebar.opened" class="hamburger-container"/>
     <breadcrumb />
     <div class="avatar-container">
-      <el-button @click="logout">LogOut</el-button>
+      <el-button @click="logout">logOut</el-button>
     </div>
   </el-menu>
 </template>
@@ -12,6 +12,7 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
+import { removeToken } from '../../../utils/auth'
 
 export default {
   components: {
@@ -29,9 +30,10 @@ export default {
       this.$store.dispatch('ToggleSideBar')
     },
     logout() {
-      this.$router.push({ path: this.redirect || '/login' })
       this.$store.dispatch('LogOut').then(() => {
-        location.reload() // 为了重新实例化vue-router对象 避免bug
+        console.log('Logging out')
+        removeToken()
+        location.reload()
       })
     }
   }

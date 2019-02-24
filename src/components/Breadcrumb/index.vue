@@ -34,8 +34,8 @@ export default {
         }
       })
       const first = matched[0]
-      if (first && first.name !== 'dashboard') {
-        matched = [{ path: '/dashboard', meta: { title: 'Dashboard' }}].concat(matched)
+      if (first && first.name !== 'user') {
+        matched = [{ path: '/user', meta: { title: 'Phonebook' }}].concat(matched)
       }
       this.levelList = matched
     },

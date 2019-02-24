@@ -1,7 +1,7 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-      <h3 class="title">vue-admin-template</h3>
+      <h3 class="title">Authorization form</h3>
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
@@ -28,7 +28,7 @@
           Sign in
         </el-button>
       </el-form-item>
-      <el-button :loading="loading" type="success" style="width:30%;" @click.native.prevent="register">
+      <el-button type="success" style="width:30%;" @click.native.prevent="register">
         Registration
       </el-button>
     </el-form>
@@ -91,8 +91,9 @@ export default {
           console.log('Valid')
           this.loading = true
           this.$store.dispatch('Login', this.loginForm).then(() => {
+            console.log('Login success')
+            this.$router.push({ path: this.redirect || '/user/phonebook' })
             this.loading = false
-            this.$router.push({ path: this.redirect || '/phonebook' })
           }).catch(() => {
             this.loading = false
             console.log('catch')

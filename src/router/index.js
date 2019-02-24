@@ -9,11 +9,12 @@ export const constantRouterMap = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/registration', component: () => import('@/views/Registration'), hidden: true },
   {
-    path: '/Phonebook',
+    path: '/user',
     component: Layout,
-    redirect: '/phonebook',
+    redirect: '/user/phonebook',
+    name: 'Phonebook',
     children: [{
-      path: 'Phonebook',
+      path: 'phonebook',
       component: () => import('@/views/Phonebook'),
       meta: { title: 'Phonebook', icon: 'example' }
     }]
